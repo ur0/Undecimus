@@ -53,4 +53,6 @@ uint64_t get_kernel_cred_addr(void);
 uint64_t give_creds_to_process_at_addr(uint64_t proc, uint64_t cred_addr);
 void set_platform_binary(uint64_t proc, bool set);
 
+uint64_t zm_fix_addr(uint64_t addr);
+
 #endif /* kutils_h */
