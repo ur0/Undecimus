@@ -964,10 +964,6 @@ bool supportsExploit(exploit_t exploit) {
                 kCFCoreFoundationVersionNumber >= 1535.12) {
                 return false;
             }
-            if (machineNameContains("iPhone11,") ||
-                machineNameContains("iPad8,")) {
-                return false;
-            }
             break;
         }
         case mach_swap_exploit: {
