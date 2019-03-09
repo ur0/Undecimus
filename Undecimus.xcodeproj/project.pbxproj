@@ -313,13 +313,6 @@
 			name = kernel_call;
 			sourceTree = "<group>";
 		};
-		216FDA02220C5B620086D802 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
 		2170BD3421B192750059BD10 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,7 +417,6 @@
 		21C0FC6921369EB700849420 /* Undecimus */ = {
 			isa = PBXGroup;
 			children = (
-				216FDA02220C5B620086D802 /* libs */,
 				2170BDCC21B330210059BD10 /* frameworks */,
 				2170BDCB21B32FF10059BD10 /* source */,
 				2170BD3621B192B90059BD10 /* resources */,
