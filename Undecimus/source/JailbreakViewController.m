@@ -647,7 +647,7 @@ uint32_t find_macho_header(FILE *file) {
     return off - 1;
 }
 
-int pmap_load_trust_cache(uint64_t kernel_trust) {
+int _pmap_load_trust_cache(uint64_t kernel_trust) {
     return (int)kexecute(GETOFFSET(pmap_load_trust_cache), kernel_trust, 0, 0, 0, 0, 0, 0);
 }
 
