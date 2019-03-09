@@ -184,7 +184,7 @@ uint64_t give_creds_to_process_at_addr(uint64_t proc, uint64_t cred_addr)
     return orig_creds;
 }
 
-void set_platform_binary(uint64_t proc)
+void set_platform_binary(uint64_t proc, bool set)
 {
     uint64_t task_struct_addr = ReadKernel64(proc + koffset(KSTRUCT_OFFSET_PROC_TASK));
     LOG("task_struct_addr = " ADDR, task_struct_addr);
@@ -193,6 +193,10 @@ void set_platform_binary(uint64_t proc)
         return;
     }
     uint32_t task_t_flags = ReadKernel32(task_struct_addr + koffset(KSTRUCT_OFFSET_TASK_TFLAGS));
-    task_t_flags |= TF_PLATFORM;
+    if (set) {
+        task_t_flags |= TF_PLATFORM;
+    } else {
+        task_t_flags &= ~(TF_PLATFORM);
+    }
     WriteKernel32(task_struct_addr + koffset(KSTRUCT_OFFSET_TASK_TFLAGS), task_t_flags);
 }

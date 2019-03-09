@@ -51,6 +51,6 @@ uint64_t get_proc_struct_for_pid(pid_t pid);
 uint64_t get_address_of_port(pid_t pid, mach_port_t port);
 uint64_t get_kernel_cred_addr(void);
 uint64_t give_creds_to_process_at_addr(uint64_t proc, uint64_t cred_addr);
-void set_platform_binary(uint64_t proc);
+void set_platform_binary(uint64_t proc, bool set);
 
 #endif /* kutils_h */

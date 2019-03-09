@@ -899,7 +899,7 @@ void jailbreak()
         _assert(ISADDR(myOriginalCredAddr), message, true);
         _assert(setuid(0) == ERR_SUCCESS, message, true);
         _assert(getuid() == 0, message, true);
-        set_platform_binary(myProcAddr);
+        set_platform_binary(myProcAddr, true);
         LOG("Successfully escaped Sandbox.");
     }
     
@@ -2096,6 +2096,7 @@ void jailbreak()
     }
 out:
     STATUS(NSLocalizedString(@"Jailbroken", nil), false, false);
+    set_platform_binary(myProcAddr, false);
     _assert(give_creds_to_process_at_addr(myProcAddr, kernelCredAddr) == kernelCredAddr, message, true);
     _assert(setuid(myUid) == ERR_SUCCESS, message, true);
     _assert(getuid() == myUid, message, true);
