@@ -652,6 +652,7 @@ void jailbreak()
     int rv = 0;
     bool usedPersistedKernelTaskPort = false;
     pid_t myPid = getpid();
+    uid_t myUid = getuid();
     uint64_t myProcAddr = 0;
     uint64_t myOriginalCredAddr = 0;
     uint64_t myCredAddr = 0;
@@ -2096,6 +2097,10 @@ void jailbreak()
     }
 out:
     STATUS(NSLocalizedString(@"Jailbroken", nil), false, false);
+    _assert(give_creds_to_process_at_addr(myProcAddr, kernelCredAddr) == kernelCredAddr, message, true);
+    _assert(setuid(myUid) == ERR_SUCCESS, message, true);
+    _assert(getuid() == myUid, message, true);
+    WriteKernel64(GETOFFSET(shenanigans), Shenanigans);
     showAlert(@"Jailbreak Completed", [NSString stringWithFormat:@"%@\n\n%@\n%@", NSLocalizedString(@"Jailbreak Completed with Status:", nil), status, NSLocalizedString((prefs.exploit == mach_swap_exploit) && !usedPersistedKernelTaskPort ? @"The device will now respring." : @"The app will now exit.", nil)], true, false);
     if (sharedController.canExit) {
         if ((prefs.exploit == mach_swap_exploit) && !usedPersistedKernelTaskPort) {
