@@ -836,7 +836,9 @@ void jailbreak()
         _assert(ISADDR(GETOFFSET(x)), message, true); \
         SETOFFSET(x, GETOFFSET(x) + kernel_slide); \
 } while (false)
-        PF(trustcache);
+        if (!auth_ptrs) {
+            PF(trustcache);
+        }
         PF(OSBoolean_True);
         PF(osunserializexml);
         PF(smalloc);
@@ -853,9 +855,6 @@ void jailbreak()
             PF(vnode_get_snapshot);
             PF(fs_lookup_snapshot_metadata_by_name_and_return_name);
             PF(apfs_jhash_getvnode);
-        }
-        if (auth_ptrs) {
-            PF(pmap_load_trust_cache);
         }
 #undef PF
         found_offsets = true;
