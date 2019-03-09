@@ -155,7 +155,11 @@ int kstruct_offsets_12_0[] = {
 #else
     0x3a0, // KSTRUCT_OFFSET_TASK_ALL_IMAGE_INFO_SIZE
 #endif
+#if __arm64e__
+    0x400, // KSTRUCT_OFFSET_TASK_TFLAGS
+#else
     0x390, // KSTRUCT_OFFSET_TASK_TFLAGS
+#endif
     
     0x0, // KSTRUCT_OFFSET_IPC_PORT_IO_BITS
     0x4, // KSTRUCT_OFFSET_IPC_PORT_IO_REFERENCES
