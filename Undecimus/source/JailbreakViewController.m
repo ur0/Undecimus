@@ -2097,13 +2097,15 @@ void jailbreak()
 out:
     STATUS(NSLocalizedString(@"Jailbroken", nil), false, false);
     set_platform_binary(myProcAddr, false);
-    _assert(give_creds_to_process_at_addr(myProcAddr, kernelCredAddr) == kernelCredAddr, message, true);
+    _assert(give_creds_to_process_at_addr(myProcAddr, myOriginalCredAddr) == kernelCredAddr, message, true);
     _assert(setuid(myUid) == ERR_SUCCESS, message, true);
     _assert(getuid() == myUid, message, true);
     WriteKernel64(GETOFFSET(shenanigans), Shenanigans);
     showAlert(@"Jailbreak Completed", [NSString stringWithFormat:@"%@\n\n%@\n%@", NSLocalizedString(@"Jailbreak Completed with Status:", nil), status, NSLocalizedString((prefs.exploit == mach_swap_exploit) && !usedPersistedKernelTaskPort ? @"The device will now respring." : @"The app will now exit.", nil)], true, false);
     if (sharedController.canExit) {
         if ((prefs.exploit == mach_swap_exploit) && !usedPersistedKernelTaskPort) {
+            WriteKernel64(myCredAddr + koffset(KSTRUCT_OFFSET_UCRED_CR_LABEL), ReadKernel64(kernelCredAddr + koffset(KSTRUCT_OFFSET_UCRED_CR_LABEL)));
+            WriteKernel64(myCredAddr + koffset(KSTRUCT_OFFSET_UCRED_CR_UID), 0);
             _assert(restartSpringBoard(), message, true);
         } else {
             exit(EXIT_SUCCESS);
